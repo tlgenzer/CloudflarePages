@@ -68,3 +68,166 @@
     </div>
   </div>
 </div>
+<style>
+  body {
+    background-color: #f1f1f1;
+}
+.wrapper {
+  display: flex;
+  font-family: Lato, sans-serif;
+  h1 {
+    color: #3d3d3d;
+    font-family: Lato, sans-serif;
+    line-height: 1.3em;
+    text-align: center;
+    font-size: 24px;
+  }
+  .mobile-button {
+    color: #3d3d3d;
+    font-family: lato, sans-serif;
+    line-height: 1.3em;
+    margin: 10px;
+    font-size: 14px;
+  }
+  .flex-col {
+    padding: 10px 20px;
+  }
+}
+
+.controls {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 33%;
+  .control-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 5px 2px;
+  }
+  input, select, label {
+    color:#3d3d3d;
+    font-family: Lato, sans-serif;
+    font-size: 16px;
+    padding: 5px;
+    }
+}
+.results-container {
+  width: 33%;
+}
+.html-container {
+  width:33%;
+  textarea {
+    color:#3d3d3d;
+    display: block;
+    font-family: Lato, sans-serif;
+    font-size: 16px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    width: 90%;
+  }
+}
+@media (max-width: 700px) {
+  h1 {
+    text-align: left!important; 
+  }
+  .wrapper {
+    flex-flow: row wrap;
+    width: 100%;
+    padding: 0;
+    }
+  .flex-col {
+    flex: 100%;
+  }
+}
+  </style>
+<script>
+  class ButtonGen {
+  constructor(config) {
+    const
+      defaults = config || new Map([
+        ['color', 'white'],
+        ['border-radius', '5'],
+        ['font', 'Helvetica, Arial, sans-serif'],
+        ['font-size', '16'],
+        ['alignment', 'center'],
+        ['text', 'Click Here'],
+        ['href', '#'],
+        ['background-color', '#2b3138']
+      ]);
+    this.fields = [];
+    this.initSpectrum();
+    this.loadDefaults(defaults);
+    this.bindEvents();
+    this.generate();
+  }
+
+  spectrumConfigGen(color) {
+    return {
+      color,
+      showInput: true,
+      preferredFormat: 'hex',
+      change: () => { this.generate(); }
+    };
+  }
+
+  initSpectrum(spectrumInputs = ['color', 'background-color']) {
+    this.spectrumTargets = [];
+    spectrumInputs.forEach((id) => {
+      this.spectrumTargets.push(id);
+      $('#' + id).spectrum(this.spectrumConfigGen('black'));
+    });
+  }
+
+  loadDefaults(config) {
+    for (const [key, value] of config.entries()) {
+      const target = $('#' + key);
+      target.on('change', () => { this.generate(); })
+      this.fields.push(target);
+      if (this.spectrumTargets.includes(key)) {
+        target.spectrum('set', value);
+      } else {
+        target.val(value);
+      }
+    }
+  }
+
+  generate() {
+    let results = {};
+    this.fields.forEach(($field) => {
+      results[$field.attr('id')] = $field.val();
+    });
+    
+    const output = `<!--Button-->
+<center>
+ <table align="center" cellspacing="0" cellpadding="0" width="100%">
+   <tr>
+     <td align="${results.alignment}" style="padding: 10px;">
+       <table border="0" class="mobile-button" cellspacing="0" cellpadding="0">
+         <tr>
+           <td align="${results.alignment}" bgcolor="${results['background-color']}" style="background-color: ${results['background-color']}; margin: auto; max-width: 600px; -webkit-border-radius: ${results['border-radius']}px; -moz-border-radius: ${results['border-radius']}px; border-radius: ${results['border-radius']}px; padding: 15px 20px; " width="100%">
+           <!--[if mso]>&nbsp;<![endif]-->
+               <a href="${results.href}" target="_blank" style="${results['font-size']}px; font-family: ${results['font']}; color: ${results.color}; font-weight:normal; text-align:center; background-color: ${results['background-color']}; text-decoration: none; border: none; -webkit-border-radius: ${results['border-radius']}px; -moz-border-radius: ${results['border-radius']}px; border-radius: ${results['border-radius']}px; display: inline-block;">
+                   <span style="font-size: ${results['font-size']}px; font-family: ${results['font']}; color: ${results.color}; font-weight:normal; line-height:1.5em; text-align:center;">${results.text}</span>
+             </a>
+           <!--[if mso]>&nbsp;<![endif]-->
+           </td>
+         </tr>
+       </table>
+     </td>
+   </tr>
+ </table>
+</center>`
+    $('.button-container').html(output);
+    $('.html-output').val(output);
+  }
+
+  bindEvents() {
+    $('#generate').on('click', () => { this.generate(); });
+  }
+}
+
+new ButtonGen();
+  </script>
