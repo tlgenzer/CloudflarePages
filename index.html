@@ -1,233 +1,90 @@
-<div class="wrapper">
-  <div class="controls flex-col">
-    <h1>Customize Your Button</h1>
-      <div class="control-row">
-        <label for="background-color">Background Color:</label><input type="text" id="background-color"/>
-       </div>   
-     <div class="control-row">
-       <label for="color">Font Color:</label>
-       <input type="text" id="color"/>
-     </div>
-     <div class="control-row">
-       <label for="border-radius">Border-radius:</label><input type="number" id="border-radius" min="0" max="99"/>
-     </div>
-     <div class="control-row">
-       <label for="font">Font:</label>
-       <select name="font" id="font">
-         <option value="Arial, sans-serif">Arial</option>
-         <option value="Arial Black, Arial, sans-serif">Arial Black</option>
-         <option value="Century Gothic, Times, serif">Century Gothic</option>
-         <option value="Courier, monospace">Courier</option>
-         <option value="Courier New, monospace">Courier New</option>
-         <option value="Geneva, Tahoma, Verdana, sans-serif">Geneva</option>
-         <option value="Georgia, Times, Times New Roman, serif">Georgia</option>
-         <option value="Helvetica, Arial, sans-serif">Helvetica</option>
-         <option value="Lucida, Geneva, Verdana, sans-serif">Lucida</option>
-         <option value="Tahoma, Verdana, sans-serif">Tahoma</option>
-         <option value="Times, Times New Roman, Baskerville, Georgia, serif">Times</option>
-         <option value="Times New Roman, Times, Georgia, serif">Times New Roman</option>
-         <option value="Verdana, Geneva, sans-serif">Verdana</option>
-        </select>
-     </div>
-     <div class="control-row">
-       <label for="font-size">Font-size:</label>
-       <input type="number" name="font-size" id="font-size" min="12" max="40"/>
-     </div>
-     <div class="control-row">
-       <label for="alignment">Alignment:</label>
-       <select name="alignment" id="alignment">
-         <option value="left">Left</option>
-         <option value="center">Center</option>
-         <option value="right">Right</option>
-        </select>
-      </div>
-      <div class="control-row">
-        <label for="text">Button Text:</label>
-        <input type="text" id="text"></text>
-      </div>
-      <div class="control-row">
-        <label for="href">Link Address:</label>
-        <input type="text" id="href"></text>
-      </div>
-  </div>
-  <div class="results-container flex-col">
-    <h1>Preview Your Button</h1>
-    <div class="button-container">
-    </div>
-  </div>
-  <div class="html-container flex-col">
-    <h1>Copy Your Code</h1>
-    <div>
-      <textarea class="html-output" readonly="readonly" onclick="this.focus();this.select()" rows="15"></textarea>
-    </div>
-    <div class="mobile-button">
-      Optional: add this to your CSS if you'd like a full-width button on smaller screens:
-    </div>
-    <div>
-      <textarea readonly="readonly" onclick="this.focus();this.select()">@media only screen and (min-width:10px) and (max-width: 500px){.mobile-button {width: 100%; }}</textarea>
-    </div>
-  </div>
+<html>
+<center><h1>Random Search Generator</h1>
+
+<div>
+ <a id="generateBtn" href="https://twilight-field-3307.tlgenzer.workers.dev/" title="Search" target="_blank">
+  <button>Generate</button></center>
+ </a>
 </div>
+</html>
 <style>
-  body {
-    background-color: #f1f1f1;
+/* Variabes */  
+$orange: #ffa600;
+$grey:#f3f3f3;
+$white: #fff;
+$base-color:$orange ;
+
+
+/* Mixin's */  
+@mixin transition {
+-webkit-transition: all 0.5s ease-in-out;
+-moz-transition: all 0.5s ease-in-out;
+transition: all 0.5s ease-in-out;
 }
+@mixin corners ($radius) {
+-moz-border-radius: $radius;
+-webkit-border-radius: $radius;
+border-radius: $radius; 
+-khtml-border-radius: $radius; 
+}
+
+body {
+background:$base-color;
+font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+height:100%;
+}
+
 .wrapper {
-  display: flex;
-  font-family: Lato, sans-serif;
-  h1 {
-    color: #3d3d3d;
-    font-family: Lato, sans-serif;
-    line-height: 1.3em;
-    text-align: center;
-    font-size: 24px;
-  }
-  .mobile-button {
-    color: #3d3d3d;
-    font-family: lato, sans-serif;
-    line-height: 1.3em;
-    margin: 10px;
-    font-size: 14px;
-  }
-  .flex-col {
-    padding: 10px 20px;
-  }
+width: 800px;
+margin: 30px auto;
+color:$white;
+text-align:center;
 }
 
-.controls {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 33%;
-  .control-row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    padding: 5px 2px;
-  }
-  input, select, label {
-    color:#3d3d3d;
-    font-family: Lato, sans-serif;
-    font-size: 16px;
-    padding: 5px;
-    }
-}
-.results-container {
-  width: 33%;
-}
-.html-container {
-  width:33%;
-  textarea {
-    color:#3d3d3d;
-    display: block;
-    font-family: Lato, sans-serif;
-    font-size: 16px;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 10px;
-    width: 90%;
-  }
-}
-@media (max-width: 700px) {
-  h1 {
-    text-align: left!important; 
-  }
-  .wrapper {
-    flex-flow: row wrap;
-    width: 100%;
-    padding: 0;
-    }
-  .flex-col {
-    flex: 100%;
-  }
-}
-  </style>
-<script>
-  class ButtonGen {
-  constructor(config) {
-    const
-      defaults = config || new Map([
-        ['color', 'white'],
-        ['border-radius', '5'],
-        ['font', 'Helvetica, Arial, sans-serif'],
-        ['font-size', '16'],
-        ['alignment', 'center'],
-        ['text', 'Click Here'],
-        ['href', '#'],
-        ['background-color', '#2b3138']
-      ]);
-    this.fields = [];
-    this.initSpectrum();
-    this.loadDefaults(defaults);
-    this.bindEvents();
-    this.generate();
-  }
-
-  spectrumConfigGen(color) {
-    return {
-      color,
-      showInput: true,
-      preferredFormat: 'hex',
-      change: () => { this.generate(); }
-    };
-  }
-
-  initSpectrum(spectrumInputs = ['color', 'background-color']) {
-    this.spectrumTargets = [];
-    spectrumInputs.forEach((id) => {
-      this.spectrumTargets.push(id);
-      $('#' + id).spectrum(this.spectrumConfigGen('black'));
-    });
-  }
-
-  loadDefaults(config) {
-    for (const [key, value] of config.entries()) {
-      const target = $('#' + key);
-      target.on('change', () => { this.generate(); })
-      this.fields.push(target);
-      if (this.spectrumTargets.includes(key)) {
-        target.spectrum('set', value);
-      } else {
-        target.val(value);
-      }
-    }
-  }
-
-  generate() {
-    let results = {};
-    this.fields.forEach(($field) => {
-      results[$field.attr('id')] = $field.val();
-    });
-    
-    const output = `<!--Button-->
-<center>
- <table align="center" cellspacing="0" cellpadding="0" width="100%">
-   <tr>
-     <td align="${results.alignment}" style="padding: 10px;">
-       <table border="0" class="mobile-button" cellspacing="0" cellpadding="0">
-         <tr>
-           <td align="${results.alignment}" bgcolor="${results['background-color']}" style="background-color: ${results['background-color']}; margin: auto; max-width: 600px; -webkit-border-radius: ${results['border-radius']}px; -moz-border-radius: ${results['border-radius']}px; border-radius: ${results['border-radius']}px; padding: 15px 20px; " width="100%">
-           <!--[if mso]>&nbsp;<![endif]-->
-               <a href="${results.href}" target="_blank" style="${results['font-size']}px; font-family: ${results['font']}; color: ${results.color}; font-weight:normal; text-align:center; background-color: ${results['background-color']}; text-decoration: none; border: none; -webkit-border-radius: ${results['border-radius']}px; -moz-border-radius: ${results['border-radius']}px; border-radius: ${results['border-radius']}px; display: inline-block;">
-                   <span style="font-size: ${results['font-size']}px; font-family: ${results['font']}; color: ${results.color}; font-weight:normal; line-height:1.5em; text-align:center;">${results.text}</span>
-             </a>
-           <!--[if mso]>&nbsp;<![endif]-->
-           </td>
-         </tr>
-       </table>
-     </td>
-   </tr>
- </table>
-</center>`
-    $('.button-container').html(output);
-    $('.html-output').val(output);
-  }
-
-  bindEvents() {
-    $('#generate').on('click', () => { this.generate(); });
-  }
+h1, h2, h3 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  font-size: 2.6em;
+  text-transform: uppercase;
 }
 
-new ButtonGen();
-  </script>
+#seconds, #tens{
+  font-size:2em;
+}
+
+button{
+@include corners (5px);
+background:$base-color;
+color:$white;
+border: solid 1px $white;
+text-decoration:none;
+cursor:pointer;
+font-size:1.2em;
+padding:18px 10px;
+margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+transform: translate(-50%, -50%);
+display: inline-block;
+width:180px;
+margin: 10px;
+ outline: none;
+  &:hover{
+	@include transition;
+	background:$white;
+	border: solid 1px $white;
+	color:$base-color;
+	}
+}
+.center { 
+  height: 200px;
+  position: relative;
+  border: 3px solid green; 
+}
+</style>
+
+
+
+
+
