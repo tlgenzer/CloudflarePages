@@ -1,1 +1,1 @@
-# CloudflarePages
+# CloudflarePages and CloudflareWorkers
