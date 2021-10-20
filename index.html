@@ -1,0 +1,70 @@
+<div class="wrapper">
+  <div class="controls flex-col">
+    <h1>Customize Your Button</h1>
+      <div class="control-row">
+        <label for="background-color">Background Color:</label><input type="text" id="background-color"/>
+       </div>   
+     <div class="control-row">
+       <label for="color">Font Color:</label>
+       <input type="text" id="color"/>
+     </div>
+     <div class="control-row">
+       <label for="border-radius">Border-radius:</label><input type="number" id="border-radius" min="0" max="99"/>
+     </div>
+     <div class="control-row">
+       <label for="font">Font:</label>
+       <select name="font" id="font">
+         <option value="Arial, sans-serif">Arial</option>
+         <option value="Arial Black, Arial, sans-serif">Arial Black</option>
+         <option value="Century Gothic, Times, serif">Century Gothic</option>
+         <option value="Courier, monospace">Courier</option>
+         <option value="Courier New, monospace">Courier New</option>
+         <option value="Geneva, Tahoma, Verdana, sans-serif">Geneva</option>
+         <option value="Georgia, Times, Times New Roman, serif">Georgia</option>
+         <option value="Helvetica, Arial, sans-serif">Helvetica</option>
+         <option value="Lucida, Geneva, Verdana, sans-serif">Lucida</option>
+         <option value="Tahoma, Verdana, sans-serif">Tahoma</option>
+         <option value="Times, Times New Roman, Baskerville, Georgia, serif">Times</option>
+         <option value="Times New Roman, Times, Georgia, serif">Times New Roman</option>
+         <option value="Verdana, Geneva, sans-serif">Verdana</option>
+        </select>
+     </div>
+     <div class="control-row">
+       <label for="font-size">Font-size:</label>
+       <input type="number" name="font-size" id="font-size" min="12" max="40"/>
+     </div>
+     <div class="control-row">
+       <label for="alignment">Alignment:</label>
+       <select name="alignment" id="alignment">
+         <option value="left">Left</option>
+         <option value="center">Center</option>
+         <option value="right">Right</option>
+        </select>
+      </div>
+      <div class="control-row">
+        <label for="text">Button Text:</label>
+        <input type="text" id="text"></text>
+      </div>
+      <div class="control-row">
+        <label for="href">Link Address:</label>
+        <input type="text" id="href"></text>
+      </div>
+  </div>
+  <div class="results-container flex-col">
+    <h1>Preview Your Button</h1>
+    <div class="button-container">
+    </div>
+  </div>
+  <div class="html-container flex-col">
+    <h1>Copy Your Code</h1>
+    <div>
+      <textarea class="html-output" readonly="readonly" onclick="this.focus();this.select()" rows="15"></textarea>
+    </div>
+    <div class="mobile-button">
+      Optional: add this to your CSS if you'd like a full-width button on smaller screens:
+    </div>
+    <div>
+      <textarea readonly="readonly" onclick="this.focus();this.select()">@media only screen and (min-width:10px) and (max-width: 500px){.mobile-button {width: 100%; }}</textarea>
+    </div>
+  </div>
+</div>
